@@ -8,11 +8,6 @@ Transfer learning aims to leverage knowledge from a (typically data-rich) **sour
 
 The AT-GP model extends Gaussian Processes for regression tasks in a transfer learning setting. The key idea is to learn a **transferability parameter `lambda`** (λ) that quantifies the relationship between the source task and the target task.
 
--   **`lambda`**: This parameter ranges from -1 to 1.
-    -   `lambda` ≈ 1: Strong positive correlation. Source data is highly relevant and directly beneficial.
-    -   `lambda` ≈ 0: No strong correlation. Source data is largely irrelevant; the model behaves like a standard GP trained only on target data.
-    -   `lambda` ≈ -1: Strong negative correlation. Source data is inversely related (though the model primarily aims to leverage positive transfer).
-
 The `lambda` parameter is not directly optimized. Instead, it is derived from two other hyperparameters, `b` and `mu` (µ), using the formula:
 `lambda = 2 * (1 / (1 + mu))^b - 1`
 These hyperparameters (`b`, `mu`), along with the kernel hyperparameters (length scale, signal variance) and noise variances for source and target domains, are learned by maximizing the **conditional log marginal likelihood (LML)** of the target data given the source data.
@@ -97,14 +92,9 @@ For the dataset experiments (WiFi, SARCOS, Wine), AT-GP is compared against:
 
 2.  **Data (for SARCOS)**:
     -   Download `sarcos_inv.mat` and `sarcos_inv_test.mat`.
-    -   Place them in the same directory as the Python script, or update the paths in the `run_sarcos_experiment` function.
 
 3.  **Execution**:
-    Run the Python script from your terminal:
-    ```bash
-    python your_script_name.py
-    ```
-    (Replace `your_script_name.py` with the actual name of the file).
+    Run the Python IPYNB file: at-gpr-AI-plotting.ipynb
 
 4.  **Configuration**:
     Key parameters for experiments can be modified at the end of the script within the `if __name__ == '__main__':` block:
